@@ -1,0 +1,28 @@
+LogTime:2021-08-10 10:53:51    ------------------GET------/notice/test/test?tel=158889535623----------
+LogTime:2021-08-10 10:53:51    []
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:51    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:53:52    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:53:52    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    ------------------GET------/notice/test/test?tel=158889535623----------
+LogTime:2021-08-10 10:54:30    []
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '1') limit 1
+LogTime:2021-08-10 10:54:30    select * from `life_sms` where (`id` = '2') limit 1

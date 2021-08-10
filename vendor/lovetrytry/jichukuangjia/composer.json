@@ -1,0 +1,36 @@
+{
+    "name": "lovetrytry/jichukuangjia",
+    "license": "MIT",
+    "homepage": "https://github.com/lovetrytry/Jichukuangjia",
+    "authors": [
+        {
+            "name": "Lovetrytry",
+            "email": "lovetrytry@yeah.net"
+        }
+    ],
+    "keywords": [
+        "php",
+        "framework"
+    ],
+    "type": "library",
+    "description": "一个最基础的 PHP 脚手架。A basic PHP scaffold.",
+    "require": {
+        "php": ">=7.4",
+        "hyperf/config": "~2.1.0",
+        "hyperf/constants": "~2.1.0",
+        "hyperf/framework": "~2.1.0",
+        "hyperf/http-server": "~2.1.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Lovetrytry\\Jichukuangjia\\": "src"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Lovetrytry\\Jichukuangjia\\ConfigProvider"
+        }
+    }
+}

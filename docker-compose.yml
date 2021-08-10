@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  juling-msb-03:
+    build: ./
+    image: juling/microservice-base:1.0.0
+    container_name: life-api
+    ports:
+      - "${DOCKER_HOST_PORT}:23333"
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - "./:/opt/from-host"
+    command:
+      - /bin/sh
+      - -c
+      - |
+          /opt/from-host/sh.d/start-server.sh
+  # juling-msb-02:
+  #   image: juling/microservice-base:1.0.0
+  #   container_name: juling-msb-02
+    # ports:
+    #   - "23302:23333"
+    # stdin_open: true
+    # tty: true
+    # privileged: true
+    # volumes:
+    #   - "./:/opt/from-host"
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #       /opt/from-host/sh.d/start-server.sh
+
+networks:
+  default:
+    name: ${DOCKER_NETWORKS_NAME}

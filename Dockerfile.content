@@ -1,0 +1,15 @@
+FROM juling/microservice-base:3627ecc26400d8f689a906bcde818013
+
+MAINTAINER jp_xing@juling.vip
+
+COPY ./ /opt/from-host
+COPY ./.env.production /opt/from-host/.env
+
+RUN chmod +x /opt/from-host/sh.d/*
+
+ENV JULING_MSB_PORT 23333
+EXPOSE $JULING_MSB_PORT
+
+WORKDIR /opt/from-host/
+
+CMD /opt/from-host/sh.d/start-server.sh

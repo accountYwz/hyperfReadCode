@@ -1,0 +1,28 @@
+[2021-07-23 10:25:17] log.ERROR: Argument 2 passed to Lovetrytry\Jichukuangjia\Mock\Handler::__construct() must be of the type string, null given, called in /life-api/vendor/lovetrytry/jichukuangjia/src/Validation/InterfaceResponse.php on line 52[36] in /life-api/vendor/lovetrytry/jichukuangjia/src/Mock/Handler.php [] []
+[2021-07-23 10:25:17] log.ERROR: #0 /life-api/vendor/lovetrytry/jichukuangjia/src/Validation/InterfaceResponse.php(52): Lovetrytry\Jichukuangjia\Mock\Handler->__construct()
+#1 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(141): Lovetrytry\Jichukuangjia\Validation\InterfaceResponse->__construct()
+#2 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(81): Lovetrytry\Jichukuangjia\Format\CMD->handleData()
+#3 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(38): Lovetrytry\Jichukuangjia\Format\CMD->setData()
+#4 /life-api/vendor/lovetrytry/jichukuangjia/src/Format.php(51): Lovetrytry\Jichukuangjia\Format\CMD->__construct()
+#5 /life-api/vendor/lovetrytry/jichukuangjia/src/Format.php(24): Lovetrytry\Jichukuangjia\Format->getClass()
+#6 /life-api/vendor/lovetrytry/jichukuangjia/src/Exception/BusinessException.php(35): Lovetrytry\Jichukuangjia\Format->__construct()
+#7 /life-api/app/Middleware/Sign.php(75): Lovetrytry\Jichukuangjia\Exception\BusinessException->__construct()
+#8 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): App\Middleware\Sign->process()
+#9 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#10 /life-api/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#11 /life-api/vendor/hyperf/http-server/src/Server.php(116): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#12 {main} [] []
+[2021-07-23 10:25:17] log.ERROR: Argument 1 passed to Lovetrytry\Jichukuangjia\Mock\Handler::__construct() must be of the type string, null given, called in /life-api/vendor/lovetrytry/jichukuangjia/src/Validation/InterfaceResponse.php on line 52[36] in /life-api/vendor/lovetrytry/jichukuangjia/src/Mock/Handler.php [] []
+[2021-07-23 10:25:17] log.ERROR: #0 /life-api/vendor/lovetrytry/jichukuangjia/src/Validation/InterfaceResponse.php(52): Lovetrytry\Jichukuangjia\Mock\Handler->__construct()
+#1 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(141): Lovetrytry\Jichukuangjia\Validation\InterfaceResponse->__construct()
+#2 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(81): Lovetrytry\Jichukuangjia\Format\CMD->handleData()
+#3 /life-api/vendor/lovetrytry/jichukuangjia/src/Format/CMD.php(38): Lovetrytry\Jichukuangjia\Format\CMD->setData()
+#4 /life-api/vendor/lovetrytry/jichukuangjia/src/Format.php(51): Lovetrytry\Jichukuangjia\Format\CMD->__construct()
+#5 /life-api/vendor/lovetrytry/jichukuangjia/src/Format.php(24): Lovetrytry\Jichukuangjia\Format->getClass()
+#6 /life-api/vendor/lovetrytry/jichukuangjia/src/Exception/BusinessException.php(35): Lovetrytry\Jichukuangjia\Format->__construct()
+#7 /life-api/app/Middleware/Sign.php(75): Lovetrytry\Jichukuangjia\Exception\BusinessException->__construct()
+#8 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): App\Middleware\Sign->process()
+#9 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#10 /life-api/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#11 /life-api/vendor/hyperf/http-server/src/Server.php(116): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#12 {main} [] []

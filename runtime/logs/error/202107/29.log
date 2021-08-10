@@ -1,0 +1,18 @@
+[2021-07-29 11:31:33] log.ERROR: Class 'App\Extend\Alisms\SendSms' not found[80] in /life-api/runtime/container/proxy/App_Service_Notice_NoticeSmsService.proxy.php [] []
+[2021-07-29 11:31:33] log.ERROR: #0 /life-api/runtime/container/proxy/App_Actions_Notice_Sms_SendSms.proxy.php(70): App\Service\Notice\NoticeSmsService->sendSms()
+#1 /life-api/vendor/hyperf/http-server/src/CoreMiddleware.php(161): App\Actions\Notice\Sms\SendSms->handle()
+#2 /life-api/vendor/hyperf/http-server/src/CoreMiddleware.php(113): Hyperf\HttpServer\CoreMiddleware->handleFound()
+#3 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): Hyperf\HttpServer\CoreMiddleware->process()
+#4 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#5 /life-api/app/Middleware/Redirect/UnLogged.php(39): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#6 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): App\Middleware\Redirect\UnLogged->process()
+#7 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#8 /life-api/vendor/lovetrytry/jichukuangjia/src/Middleware/Response.php(56): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#9 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): Lovetrytry\Jichukuangjia\Middleware\Response->process()
+#10 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#11 /life-api/app/Middleware/Sign.php(44): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#12 /life-api/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): App\Middleware\Sign->process()
+#13 /life-api/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#14 /life-api/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#15 /life-api/vendor/hyperf/http-server/src/Server.php(116): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#16 {main} [] []

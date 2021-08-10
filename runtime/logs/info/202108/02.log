@@ -1,0 +1,6 @@
+[2021-08-02 15:43:10] sql.INFO: [138.21] select * from `life_sms` where (`tel` = '15889535623' and `type` = '1') limit 1 [] []
+[2021-08-02 15:43:10] sql.INFO: [184.75] update `life_sms` set `code` = '881530', `expire_time` = '1627890490', `life_sms`.`updated_at` = '2021-08-02 15:43:10' where (`tel` = '15889535623' and `type` = '1') [] []
+[2021-08-02 15:43:55] sql.INFO: [139.34] select * from `life_sms` where (`tel` = '15889535623' and `type` = '1') limit 1 [] []
+[2021-08-02 15:43:55] sql.INFO: [155.64] update `life_sms` set `code` = '881530', `expire_time` = '1627890535', `life_sms`.`updated_at` = '2021-08-02 15:43:55' where (`tel` = '15889535623' and `type` = '1') [] []
+[2021-08-02 15:46:49] sql.INFO: [151.16] select * from `life_sms` where (`tel` = '15889535623' and `type` = '1') limit 1 [] []
+[2021-08-02 15:46:49] sql.INFO: [148.72] update `life_sms` set `code` = '881530', `expire_time` = '1627890709', `life_sms`.`updated_at` = '2021-08-02 15:46:49' where (`tel` = '15889535623' and `type` = '1') [] []
