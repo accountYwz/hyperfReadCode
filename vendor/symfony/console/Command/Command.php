@@ -66,6 +66,7 @@ class Command
     public static function getDefaultName()
     {
         $class = static::class;
+        var_dump($class);
 
         if (\PHP_VERSION_ID >= 80000 && $attribute = (new \ReflectionClass($class))->getAttributes(AsCommand::class)) {
             return $attribute[0]->newInstance()->name;
@@ -96,11 +97,14 @@ class Command
      * @param string|null $name The name of the command; passing null means it must be set in configure()
      *
      * @throws LogicException When the command name is empty
+     * 107、108行会打印出很多$name,代码是怎么运行的？
      */
     public function __construct(string $name = null)
     {
         $this->definition = new InputDefinition();
 
+        var_dump('-----------');
+        var_dump($name);
         if (null === $name && null !== $name = static::getDefaultName()) {
             $aliases = explode('|', $name);
 

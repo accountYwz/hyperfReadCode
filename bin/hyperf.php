@@ -18,6 +18,8 @@ require BASE_PATH . '/vendor/autoload.php';
     /** @var Psr\Container\ContainerInterface $container */
     $container = require BASE_PATH . '/config/container.php';
 
+    //$container->ger()会遍历初并始化Hyperf\Contract\ApplicationInterface::class Entry所有的类。代码为啥会遍历呢？
     $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
-    $application->run();
+    //Symfony\Component\Console\Command\Application->run()
+//    $application->run();
 })();
