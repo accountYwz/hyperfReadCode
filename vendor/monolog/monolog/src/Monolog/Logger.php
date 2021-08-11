@@ -290,6 +290,7 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $offset = 0;
         $record = null;
+
         foreach ($this->handlers as $handler) {
             if (null === $record) {
                 // skip creating the record as long as no handler is going to handle it
@@ -322,7 +323,6 @@ class Logger implements LoggerInterface, ResettableInterface
 
             // once the record exists, send it to all handlers as long as the bubbling chain is not interrupted
             try {
-
                 if (true === $handler->handle($record)) {
                     break;
                 }
@@ -332,6 +332,7 @@ class Logger implements LoggerInterface, ResettableInterface
                 return true;
             }
         }
+
         return null !== $record;
     }
 

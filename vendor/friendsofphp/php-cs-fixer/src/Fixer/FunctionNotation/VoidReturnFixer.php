@@ -79,15 +79,10 @@ final class VoidReturnFixer extends AbstractFixer
     protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // These cause syntax errors.
-        static $excludedFunctions = [
+        static $excludeFuncNames = [
             [T_STRING, '__construct'],
             [T_STRING, '__destruct'],
             [T_STRING, '__clone'],
-            [T_STRING, '__isset'],
-            [T_STRING, '__sleep'],
-            [T_STRING, '__serialize'],
-            [T_STRING, '__set_state'],
-            [T_STRING, '__debugInfo'],
         ];
 
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
@@ -95,8 +90,8 @@ final class VoidReturnFixer extends AbstractFixer
                 continue;
             }
 
-            $functionName = $tokens->getNextMeaningfulToken($index);
-            if ($tokens[$functionName]->equalsAny($excludedFunctions, false)) {
+            $funcName = $tokens->getNextMeaningfulToken($index);
+            if ($tokens[$funcName]->equalsAny($excludeFuncNames, false)) {
                 continue;
             }
 

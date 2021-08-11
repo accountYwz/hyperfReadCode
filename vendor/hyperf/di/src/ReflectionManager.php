@@ -23,6 +23,7 @@ class ReflectionManager extends MetadataCollector
      */
     protected static $container = [];
 
+    //返回容器中类的名称
     public static function reflectClass(string $className): ReflectionClass
     {
         if (! isset(static::$container['class'][$className])) {
@@ -31,6 +32,7 @@ class ReflectionManager extends MetadataCollector
             }
             static::$container['class'][$className] = new ReflectionClass($className);
         }
+
         return static::$container['class'][$className];
     }
 

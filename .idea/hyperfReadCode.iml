@@ -52,7 +52,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/hyperf/contract" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/hyperf/async-queue" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/hyperf/view-engine" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/hyperf/logger" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />

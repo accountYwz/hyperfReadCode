@@ -66,11 +66,7 @@ class XdebugHandler
         if (extension_loaded('xdebug')) {
             $this->loaded = phpversion('xdebug') ?: 'unknown';
 
-            if (version_compare($this->loaded, '3.1', '>=')) {
-                /** @phpstan-ignore-next-line */
-                $modes = xdebug_info('mode');
-                $this->mode = empty($modes) ? 'off' : implode(',', $modes);
-            } elseif (false !== ($mode = ini_get('xdebug.mode'))) {
+            if (false !== ($mode = ini_get('xdebug.mode'))) {
                 $this->mode = getenv('XDEBUG_MODE') ?: ($mode  ?: 'off');
                 if (preg_match('/^,+$/', str_replace(' ', '', $this->mode))) {
                     $this->mode = 'off';
@@ -381,8 +377,7 @@ class XdebugHandler
         }
 
         $content = '';
-        $sectionRegex = '/^\s*\[(?:PATH|HOST)\s*=/mi';
-        $xdebugRegex = '/^\s*(zend_extension\s*=.*xdebug.*)$/mi';
+        $regex = '/^\s*(zend_extension\s*=.*xdebug.*)$/mi';
 
         foreach ($iniFiles as $file) {
             // Check for inaccessible ini files
@@ -390,11 +385,7 @@ class XdebugHandler
                 $error = 'Unable to read ini: '.$file;
                 return false;
             }
-            // Check and remove directives after HOST and PATH sections
-            if (preg_match($sectionRegex, $data, $matches, PREG_OFFSET_CAPTURE)) {
-                $data = substr($data, 0, $matches[0][1]);
-            }
-            $content .= preg_replace($xdebugRegex, ';$1', $data).PHP_EOL;
+            $content .= preg_replace($regex, ';$1', $data).PHP_EOL;
         }
 
         // Merge loaded settings into our ini content, if it is valid

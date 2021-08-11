@@ -38,21 +38,23 @@ class StartServer extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->checkEnvironment($output);
 
+        //检查开发环境
+        $this->checkEnvironment($output);
+        //初始化服务工厂
         $serverFactory = $this->container->get(ServerFactory::class)
             ->setEventDispatcher($this->container->get(EventDispatcherInterface::class))
             ->setLogger($this->container->get(StdoutLoggerInterface::class));
-
+        //获得服务配置
         $serverConfig = $this->container->get(ConfigInterface::class)->get('server', []);
         if (! $serverConfig) {
             throw new InvalidArgumentException('At least one server should be defined.');
         }
-
+        //初始化服务配置
         $serverFactory->configure($serverConfig);
-
+        //开启一键化协程
         Coroutine::set(['hook_flags' => swoole_hook_flags()]);
-
+        //启动服务，比如Hyperf\Server\Server
         $serverFactory->start();
 
         return 0;

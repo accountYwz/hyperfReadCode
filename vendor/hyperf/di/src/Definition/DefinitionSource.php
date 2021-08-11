@@ -28,7 +28,9 @@ class DefinitionSource implements DefinitionSourceInterface
 
     public function __construct(array $source)
     {
+
         $this->source = $this->normalizeSource($source);
+
     }
 
     /**
@@ -85,6 +87,7 @@ class DefinitionSource implements DefinitionSourceInterface
     }
 
     /**
+     * 将用户定义源规范化为标准定义源。
      * Normaliaze the user definition source to a standard definition souce.
      */
     private function normalizeSource(array $source): array
@@ -108,6 +111,7 @@ class DefinitionSource implements DefinitionSourceInterface
             if (method_exists($definition, '__invoke')) {
                 return new FactoryDefinition($identifier, $definition, []);
             }
+            //依赖中的接口走这里
             return $this->autowire($identifier, new ObjectDefinition($identifier, $definition));
         }
         if (is_callable($definition)) {
@@ -129,6 +133,7 @@ class DefinitionSource implements DefinitionSourceInterface
          * Constructor.
          */
         $class = ReflectionManager::reflectClass($className);
+        //获取类的构造函数
         $constructor = $class->getConstructor();
         if ($constructor && $constructor->isPublic()) {
             $constructorInjection = new MethodInjection('__construct', $this->getParametersDefinition($constructor));

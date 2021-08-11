@@ -555,14 +555,14 @@ $array = [
             }
         }
 
-        Utils::triggerDeprecation(new InvalidFixerConfigurationException(
-            $this->getName(),
+        Utils::triggerDeprecation(
             sprintf(
                 'Given configuration is deprecated and will be removed in 3.0. Use configuration %s as replacement for %s.',
                 HelpCommand::toString($newConfig),
                 HelpCommand::toString($configuration)
-            )
-        ));
+            ),
+            InvalidFixerConfigurationException::class
+        );
 
         return $newConfig;
     }

@@ -27,9 +27,6 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 final class DocumentationCommand extends Command
 {
-    /**
-     * @var string
-     */
     protected static $defaultName = 'documentation';
 
     /**

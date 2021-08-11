@@ -46,6 +46,8 @@ final class SingleBlankLineBeforeNamespaceFixer extends AbstractLinesBeforeNames
 
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoBlankLinesAfterPhpdocFixer.
      */
     public function getPriority()
     {

@@ -32,14 +32,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ArraySyntaxFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
-    /**
-     * @var null|int
-     */
     private $candidateTokenKind;
-
-    /**
-     * @var null|string
-     */
     private $fixCallback;
 
     /**

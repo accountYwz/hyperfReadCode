@@ -68,11 +68,7 @@ final class FixerConfigurationResolver implements FixerConfigurationResolverInte
                         throw new InvalidOptionsException(sprintf('Aliased option "%s"/"%s" is passed multiple times.', $name, $alias));
                     }
 
-                    Utils::triggerDeprecation(new \RuntimeException(sprintf(
-                        'Option "%s" is deprecated, use "%s" instead.',
-                        $alias,
-                        $name
-                    )));
+                    Utils::triggerDeprecation(sprintf('Option "%s" is deprecated, use "%s" instead.', $alias, $name));
 
                     $options[$name] = $options[$alias];
                     unset($options[$alias]);

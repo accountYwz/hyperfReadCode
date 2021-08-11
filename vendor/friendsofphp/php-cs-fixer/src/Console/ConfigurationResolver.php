@@ -133,49 +133,15 @@ final class ConfigurationResolver
     ];
 
     private $cacheFile;
-
-    /**
-     * @var null|CacheManagerInterface
-     */
     private $cacheManager;
-
-    /**
-     * @var null|DifferInterface
-     */
     private $differ;
-
-    /**
-     * @var null|Directory
-     */
     private $directory;
-
-    /**
-     * @var null|iterable
-     */
     private $finder;
-
     private $format;
-
-    /**
-     * @var null|Linter
-     */
     private $linter;
-
     private $path;
-
-    /**
-     * @var null|string
-     */
     private $progress;
-
-    /**
-     * @var null|RuleSet
-     */
     private $ruleSet;
-
-    /**
-     * @var null|bool
-     */
     private $usingCache;
 
     /**
@@ -269,7 +235,7 @@ final class ConfigurationResolver
 
                 if (isset($deprecatedConfigs[$configFileBasename])) {
                     $message = "Configuration file `{$configFileBasename}` is deprecated, rename to `{$deprecatedConfigs[$configFileBasename]}`.";
-                    Utils::triggerDeprecation(new InvalidConfigurationException($message));
+                    Utils::triggerDeprecation($message, InvalidConfigurationException::class);
                 }
 
                 $config = self::separatedContextLessInclude($configFile);
@@ -491,9 +457,10 @@ final class ConfigurationResolver
                         implode('", "', $progressTypes)
                     ));
                 } elseif (\in_array($progressType, ['estimating', 'estimating-max', 'run-in'], true)) {
-                    Utils::triggerDeprecation(new \InvalidArgumentException(
-                        'Passing `estimating`, `estimating-max` or `run-in` is deprecated and will not be supported in 3.0, use `none` or `dots` instead.'
-                    ));
+                    Utils::triggerDeprecation(
+                        'Passing `estimating`, `estimating-max` or `run-in` is deprecated and will not be supported in 3.0, use `none` or `dots` instead.',
+                        \InvalidArgumentException::class
+                    );
                 }
 
                 $this->progress = $progressType;
@@ -831,7 +798,7 @@ final class ConfigurationResolver
                     ? sprintf(' and will be removed in version %d.0.', Application::getMajorVersion() + 1)
                     : sprintf('. Use %s instead.', str_replace('`', '"', Utils::naturalLanguageJoinWithBackticks($successors)));
 
-                Utils::triggerDeprecation(new \RuntimeException("Rule \"{$fixerName}\" is deprecated{$messageEnd}"));
+                Utils::triggerDeprecation("Rule \"{$fixerName}\" is deprecated{$messageEnd}");
             }
         }
     }
@@ -977,9 +944,10 @@ final class ConfigurationResolver
             return false;
         }
 
-        Utils::triggerDeprecation(new InvalidConfigurationException(
-            sprintf('Expected "yes" or "no" for option "%s", other values are deprecated and support will be removed in 3.0. Got "%s", this implicitly set the option to "false".', $optionName, $value)
-        ));
+        Utils::triggerDeprecation(
+            sprintf('Expected "yes" or "no" for option "%s", other values are deprecated and support will be removed in 3.0. Got "%s", this implicitly set the option to "false".', $optionName, $value),
+            InvalidConfigurationException::class
+        );
 
         return false;
     }

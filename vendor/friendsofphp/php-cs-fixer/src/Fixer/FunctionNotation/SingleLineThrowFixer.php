@@ -40,6 +40,11 @@ final class SingleLineThrowFixer extends AbstractFixer
     const REMOVE_WHITESPACE_BEFORE_TOKENS = [')',  ']', ',', ';'];
 
     /**
+     * @internal
+     */
+    const THROW_END_TOKENS = [';', '(', '{', '}'];
+
+    /**
      * {@inheritdoc}
      */
     public function getDefinition()
@@ -67,6 +72,7 @@ final class SingleLineThrowFixer extends AbstractFixer
      */
     public function getPriority()
     {
+        // must be fun before ConcatSpaceFixer
         return 36;
     }
 
@@ -80,17 +86,12 @@ final class SingleLineThrowFixer extends AbstractFixer
                 continue;
             }
 
-            $endCandidateIndex = $tokens->getNextMeaningfulToken($index);
+            /** @var int $endCandidateIndex */
+            $endCandidateIndex = $tokens->getNextTokenOfKind($index, self::THROW_END_TOKENS);
 
-            while (!$tokens[$endCandidateIndex]->equalsAny([')',  ']', ',', ';'])) {
-                $blockType = Tokens::detectBlockType($tokens[$endCandidateIndex]);
-                if (null !== $blockType) {
-                    if (Tokens::BLOCK_TYPE_CURLY_BRACE === $blockType['type']) {
-                        break;
-                    }
-                    $endCandidateIndex = $tokens->findBlockEnd($blockType['type'], $endCandidateIndex);
-                }
-                $endCandidateIndex = $tokens->getNextMeaningfulToken($endCandidateIndex);
+            while ($tokens[$endCandidateIndex]->equals('(')) {
+                $closingBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $endCandidateIndex);
+                $endCandidateIndex = $tokens->getNextTokenOfKind($closingBraceIndex, self::THROW_END_TOKENS);
             }
 
             $this->trimNewLines($tokens, $index, $tokens->getPrevMeaningfulToken($endCandidateIndex));

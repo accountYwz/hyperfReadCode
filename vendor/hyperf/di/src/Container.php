@@ -26,7 +26,8 @@ class Container implements HyperfContainerInterface
      *
      * @var array
      */
-    private $resolvedEntries = [];
+
+    public $resolvedEntries = [];
 
     /**
      * Map of definitions that are already fetched (local cache).
@@ -49,8 +50,11 @@ class Container implements HyperfContainerInterface
     public function __construct(Definition\DefinitionSourceInterface $definitionSource)
     {
         $this->definitionSource = $definitionSource;
+
+        //定义解析器
         $this->definitionResolver = new ResolverDispatcher($this);
         // Auto-register the container.
+        //解析器实体,也就是容器
         $this->resolvedEntries = [
             self::class => $this,
             PsrContainerInterface::class => $this,

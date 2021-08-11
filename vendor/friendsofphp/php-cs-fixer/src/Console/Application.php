@@ -37,7 +37,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class Application extends BaseApplication
 {
-    const VERSION = '2.19.1';
+    const VERSION = '2.19.0';
     const VERSION_CODENAME = 'Testament';
 
     /**
@@ -105,7 +105,8 @@ final class Application extends BaseApplication
             null !== $stdErr
             && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE
         ) {
-            $triggeredDeprecations = Utils::getTriggeredDeprecations();
+            $triggeredDeprecations = array_unique(Utils::getTriggeredDeprecations());
+            sort($triggeredDeprecations);
             if ($triggeredDeprecations) {
                 $stdErr->writeln('');
                 $stdErr->writeln($stdErr->isDecorated() ? '<bg=yellow;fg=black;>Detected deprecations in use:</>' : 'Detected deprecations in use:');

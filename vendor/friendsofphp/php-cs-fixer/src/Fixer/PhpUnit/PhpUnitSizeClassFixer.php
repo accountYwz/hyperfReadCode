@@ -160,7 +160,7 @@ final class PhpUnitSizeClassFixer extends AbstractPhpUnitFixer implements Whites
      */
     private function splitUpDocBlock($lines, Tokens $tokens, $docBlockIndex)
     {
-        $lineContent = $this->getSingleLineDocBlockEntry($lines[0]);
+        $lineContent = $this->getSingleLineDocBlockEntry($lines);
         $lineEnd = $this->whitespacesConfig->getLineEnding();
         $originalIndent = WhitespacesAnalyzer::detectIndent($tokens, $tokens->getNextNonWhitespace($docBlockIndex));
 
@@ -172,11 +172,13 @@ final class PhpUnitSizeClassFixer extends AbstractPhpUnitFixer implements Whites
     }
 
     /**
+     * @param Line|Line[]|string $line
+     *
      * @return string
      */
-    private function getSingleLineDocBlockEntry(Line $line)
+    private function getSingleLineDocBlockEntry($line)
     {
-        $line = $line->getContent();
+        $line = $line[0];
         $line = str_replace('*/', '', $line);
         $line = trim($line);
         $line = str_split($line);
