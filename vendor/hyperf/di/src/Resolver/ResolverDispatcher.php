@@ -51,14 +51,17 @@ class ResolverDispatcher implements ResolverInterface
      */
     public function resolve(DefinitionInterface $definition, array $parameters = [])
     {
+//        var_dump('---------10000000---------');
+//        var_dump($definition);
         if ($definition instanceof SelfResolvingDefinitionInterface) {
             return $definition->resolve($this->container);
         }
-
+        //类 DepthGuard 在之后中止解析器达到预定义的深度限制。 这是用于检测循环依赖。
         $guard = DepthGuard::getInstance();
-
-        return $guard->call($definition->getName(), function () use ($definition, $parameters) {
+        return $guard->call($definition->getName(), function () use ($definition, $parameters) {;
             $resolver = $this->getDefinitionResolver($definition);
+//            var_dump(var_dump('---------$resolver---------'));
+//            var_dump($resolver);
             return $resolver->resolve($definition, $parameters);
         });
     }

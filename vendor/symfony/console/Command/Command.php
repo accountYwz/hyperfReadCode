@@ -66,7 +66,6 @@ class Command
     public static function getDefaultName()
     {
         $class = static::class;
-        var_dump($class);
 
         if (\PHP_VERSION_ID >= 80000 && $attribute = (new \ReflectionClass($class))->getAttributes(AsCommand::class)) {
             return $attribute[0]->newInstance()->name;
@@ -102,9 +101,6 @@ class Command
     public function __construct(string $name = null)
     {
         $this->definition = new InputDefinition();
-
-        var_dump('-----------');
-        var_dump($name);
         if (null === $name && null !== $name = static::getDefaultName()) {
             $aliases = explode('|', $name);
 

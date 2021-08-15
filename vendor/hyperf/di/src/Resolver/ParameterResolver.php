@@ -38,16 +38,26 @@ class ParameterResolver
         if (! $method) {
             return $args;
         }
-
         $definitionParameters = $definition ? $definition->getParameters() : [];
+        //var_dump('---------$definitionParameters------------');
+        //var_dump($definitionParameters);
+        //var_dump('---------getParameters------------');
+
+        //var_dump($method->getParameters());
+
         foreach ($method->getParameters() as $index => $parameter) {
+            //var_dump('-------$parameter----------');
+            //var_dump($parameter);
             if (array_key_exists($parameter->getName(), $parameters)) {
                 $value = &$parameters[$parameter->getName()];
             } elseif (array_key_exists($index, $parameters)) {
                 $value = &$parameters[$index];
             } elseif (array_key_exists($index, $definitionParameters)) {
+                //var_dump('------$index-------------');
+                //var_dump($index);
                 $value = &$definitionParameters[$index];
             } else {
+
                 if ($parameter->isDefaultValueAvailable() || $parameter->isOptional()) {
                     $args[] = $this->getParameterDefaultValue($parameter, $method);
                     continue;
@@ -58,13 +68,15 @@ class ParameterResolver
                     $this->getFunctionName($method)
                 ));
             }
-
+            //var_dump('---------$value------------');
+            //var_dump($value);
             // Nested definitions
             if ($value instanceof DefinitionInterface) {
                 // If the container cannot produce the entry, we can use the default parameter value
                 if ($parameter->isOptional() && ! $this->definitionResolver->isResolvable($value)) {
                     $value = $this->getParameterDefaultValue($parameter, $method);
                 } else {
+                    //var_dump('---------2222222222--------------');
                     $value = $this->definitionResolver->resolve($value);
                 }
             }

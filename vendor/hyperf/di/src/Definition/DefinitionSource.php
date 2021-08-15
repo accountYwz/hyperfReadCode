@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace Hyperf\Di\Definition;
 
+use http\Env\Response;
 use Hyperf\Di\ReflectionManager;
 use ReflectionFunctionAbstract;
 use function class_exists;
@@ -73,10 +74,16 @@ class DefinitionSource implements DefinitionSourceInterface
             if ($parameter->isOptional()) {
                 continue;
             }
-
+            //var_dump('-----$parameter-----------------');
+            //var_dump($parameter);
+            //比如为啥这里获取到manager就能获取到CacheManager?
             $parameterClass = $parameter->getClass();
-
+            //var_dump('------$parameterClass------------');
+            //var_dump($parameterClass);
             if ($parameterClass) {
+                //var_dump('------$parameterClass->getName()------------');
+
+                //var_dump($parameterClass->getName());
                 $parameters[$index] = new Reference($parameterClass->getName());
             }
         }
@@ -90,11 +97,17 @@ class DefinitionSource implements DefinitionSourceInterface
     private function normalizeSource(array $source): array
     {
         $definitions = [];
+
         foreach ($source as $identifier => $definition) {
-            $normalizedDefinition = $this->normalizeDefinition($identifier, $definition);
-            if (! is_null($normalizedDefinition)) {
-                $definitions[$identifier] = $normalizedDefinition;
-            }
+
+                $normalizedDefinition = $this->normalizeDefinition($identifier, $definition);
+//                var_dump('--------$normalizeSource-----------');
+//                var_dump($normalizedDefinition);
+                if (! is_null($normalizedDefinition)) {
+                    $definitions[$identifier] = $normalizedDefinition;
+                }
+
+
         }
         return $definitions;
     }
@@ -125,13 +138,25 @@ class DefinitionSource implements DefinitionSourceInterface
 
         $definition = $definition ?: new ObjectDefinition($name);
 
+        //var_dump('-----------$definition100000000000-----------');
+        //var_dump($definition);
+        //var_dump('---------------------$className-----------------------');
+        //var_dump($className);
         /**
          * Constructor.
          */
         $class = ReflectionManager::reflectClass($className);
+        //var_dump('---------------------$class-----------------------');
+        //var_dump($class);
         $constructor = $class->getConstructor();
+        //var_dump('---------$constructor--------');
+        //var_dump($constructor);
+
         if ($constructor && $constructor->isPublic()) {
             $constructorInjection = new MethodInjection('__construct', $this->getParametersDefinition($constructor));
+            //var_dump('---------$constructorInjection--------');
+
+            //var_dump($constructorInjection);
             $definition->completeConstructorInjection($constructorInjection);
         }
 

@@ -132,7 +132,7 @@ class Application implements ResetInterface
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
-//        var_dump('-------2--------');
+        var_dump('-------2--------');
         if (\function_exists('putenv')) {
             @putenv('LINES='.$this->terminal->getHeight());
             @putenv('COLUMNS='.$this->terminal->getWidth());
@@ -636,7 +636,6 @@ class Application implements ResetInterface
         $this->init();
 
         $aliases = [];
-
         foreach ($this->commands as $command) {
             foreach ($command->getAliases() as $alias) {
                 if (!$this->has($alias)) {
@@ -942,6 +941,8 @@ class Application implements ResetInterface
      */
     protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
     {
+//        var_dump('-------$command---------');
+//        var_dump($command);
         foreach ($command->getHelperSet() as $helper) {
             if ($helper instanceof InputAwareInterface) {
                 $helper->setInput($input);
@@ -994,6 +995,8 @@ class Application implements ResetInterface
             $this->dispatcher->dispatch($event, ConsoleEvents::COMMAND);
 
             if ($event->commandShouldRun()) {
+//                var_dump('-----$command--------');
+//                var_dump($command);
                 $exitCode = $command->run($input, $output);
             } else {
                 $exitCode = ConsoleCommandEvent::RETURN_CODE_DISABLED;

@@ -16,6 +16,7 @@ use Hyperf\Framework\Bootstrap;
 use Hyperf\Framework\Event\BeforeMainServerStart;
 use Hyperf\Framework\Event\BeforeServerStart;
 use Hyperf\Server\Exception\RuntimeException;
+use PHPUnit\Util\Xml\ValidationResult;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -69,6 +70,7 @@ class Server implements ServerInterface
 
     public function init(ServerConfig $config): ServerInterface
     {
+        var_dump('-------init-----');
         $this->initServers($config);
 
         return $this;
@@ -76,6 +78,8 @@ class Server implements ServerInterface
 
     public function start()
     {
+
+        var_dump('-------start-----');
         $this->server->start();
     }
 
@@ -87,7 +91,6 @@ class Server implements ServerInterface
     protected function initServers(ServerConfig $config)
     {
         $servers = $this->sortServers($config->getServers());
-
         foreach ($servers as $server) {
             $name = $server->getName();
             $type = $server->getType();
@@ -95,8 +98,10 @@ class Server implements ServerInterface
             $port = $server->getPort();
             $sockType = $server->getSockType();
             $callbacks = $server->getCallbacks();
-
+//            var_dump('---$callbacks--------------');
+//            var_dump($callbacks);
             if (! $this->server instanceof SwooleServer) {
+                var_dump('------9999-100000000----');
                 $this->server = $this->makeServer($type, $host, $port, $config->getMode(), $sockType);
                 $callbacks = array_replace($this->defaultCallbacks(), $config->getCallbacks(), $callbacks);
                 $this->registerSwooleEvents($this->server, $callbacks, $name);
@@ -105,9 +110,11 @@ class Server implements ServerInterface
 
                 if (class_exists(BeforeMainServerStart::class)) {
                     // Trigger BeforeMainServerStart event, this event only trigger once before main server start.
+//                    var_dump($this->eventDispatcher);
                     $this->eventDispatcher->dispatch(new BeforeMainServerStart($this->server, $config->toArray()));
                 }
             } else {
+
                 /** @var bool|\Swoole\Server\Port $slaveServer */
                 $slaveServer = $this->server->addlistener($host, $port, $sockType);
                 if (! $slaveServer) {
@@ -120,6 +127,7 @@ class Server implements ServerInterface
 
             // Trigger beforeStart event.
             if (isset($callbacks[Event::ON_BEFORE_START])) {
+                //var_dump('--------Trigger beforeStart event.---------');
                 [$class, $method] = $callbacks[Event::ON_BEFORE_START];
                 if ($this->container->has($class)) {
                     $this->container->get($class)->{$method}();

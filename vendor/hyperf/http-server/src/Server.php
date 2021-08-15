@@ -99,6 +99,7 @@ class Server implements OnRequestInterface, MiddlewareInitializerInterface
 
     public function onRequest($request, $response): void
     {
+        var_dump('------------onRequest--------------');
         try {
             CoordinatorManager::until(Constants::WORKER_START)->yield();
 
