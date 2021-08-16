@@ -36,6 +36,7 @@ class ResolverDispatcher implements ResolverInterface
      */
     private $container;
 
+    //解析器调度器
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

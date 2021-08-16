@@ -430,6 +430,7 @@ abstract class Command extends SymfonyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        var_dump($input);
         $this->enableDispatcher($input);
         $callback = function () {
             try {

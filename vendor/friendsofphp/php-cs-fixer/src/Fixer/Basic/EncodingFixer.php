@@ -25,9 +25,6 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class EncodingFixer extends AbstractFixer
 {
-    /**
-     * @var string
-     */
     private $BOM;
 
     public function __construct()

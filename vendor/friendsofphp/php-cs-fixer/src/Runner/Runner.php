@@ -128,7 +128,6 @@ final class Runner
             ? new FileCachingLintingIterator($fileFilteredFileIterator, $this->linter)
             : new FileLintingIterator($fileFilteredFileIterator, $this->linter);
 
-        /** @var \SplFileInfo $file */
         foreach ($collection as $file) {
             $fixInfo = $this->fixFile($file, $collection->currentLintingResult());
 
@@ -136,7 +135,7 @@ final class Runner
             Tokens::clearCache();
 
             if ($fixInfo) {
-                $name = $this->directory->getRelativePathTo($file->__toString());
+                $name = $this->directory->getRelativePathTo($file);
                 $changed[$name] = $fixInfo;
 
                 if ($this->stopOnViolation) {

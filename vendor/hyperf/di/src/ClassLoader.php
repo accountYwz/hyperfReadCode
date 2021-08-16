@@ -39,11 +39,15 @@ class ClassLoader
 
     public function __construct(ComposerClassLoader $classLoader, string $proxyFileDir, string $configDir)
     {
+        echo '5---'.PHP_EOL;
+        //将ComposerClassLoader $classLoader加载器复制给hyperf的加载器
         $this->setComposerClassLoader($classLoader);
+        //解析.env环境
         if (file_exists(BASE_PATH . '/.env')) {
             $this->loadDotenv();
         }
-
+        echo '6---'.PHP_EOL;
+        //生成代理类缓存，代理类缓存有啥作用？
         // Scan by ScanConfig to generate the reflection class map
         $config = ScanConfig::instance($configDir);
         $classLoader->addClassMap($config->getClassMap());
@@ -53,6 +57,7 @@ class ClassLoader
         $composerLoaderClassMap = $this->getComposerClassLoader()->getClassMap();
         $proxyManager = new ProxyManager($reflectionClassMap, $composerLoaderClassMap, $proxyFileDir);
         $this->proxies = $proxyManager->getProxies();
+        echo '7---'.PHP_EOL;
     }
 
     public function loadClass(string $class): void
@@ -75,15 +80,18 @@ class ClassLoader
             // This dir is the default proxy file dir path of Hyperf
             $configDir = BASE_PATH . '/config/';
         }
-
+        //返回所有已注册的 __autoload() 函数.composer工作时已经注册
         $loaders = spl_autoload_functions();
+
 
         // Proxy the composer class loader
         foreach ($loaders as &$loader) {
             $unregisterLoader = $loader;
+
             if (is_array($loader) && $loader[0] instanceof ComposerClassLoader) {
                 /** @var ComposerClassLoader $composerClassLoader */
                 $composerClassLoader = $loader[0];
+                //把composer的所有类向注解类AnnotationRegistry注册
                 AnnotationRegistry::registerLoader(function ($class) use ($composerClassLoader) {
                     return (bool) $composerClassLoader->findFile($class);
                 });
@@ -94,11 +102,12 @@ class ClassLoader
 
         unset($loader);
 
+        //为啥又注册一遍？
         // Re-register the loaders
         foreach ($loaders as $loader) {
             spl_autoload_register($loader);
         }
-
+        //初始化延迟加载器。 这会将 LazyLoader 添加到自动加载队列的顶部
         // Initialize Lazy Loader. This will prepend LazyLoader to the top of autoload queue.
         LazyLoader::bootstrap($configDir);
     }
@@ -107,6 +116,7 @@ class ClassLoader
     {
         $this->composerClassLoader = $classLoader;
         // Set the ClassLoader to Hyperf\Utils\Composer to avoid unnecessary find process.
+        //将 ClassLoader 设置为 Hyperf\Utils\Composer 以避免不必要的查找过程
         Composer::setLoader($classLoader);
         return $this;
     }

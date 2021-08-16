@@ -42,7 +42,7 @@ class ArrayDenormalizer implements ContextAwareDenormalizerInterface, Denormaliz
         if (!\is_array($data)) {
             throw new InvalidArgumentException('Data expected to be an array, '.get_debug_type($data).' given.');
         }
-        if (!str_ends_with($type, '[]')) {
+        if ('[]' !== substr($type, -2)) {
             throw new InvalidArgumentException('Unsupported class: '.$type);
         }
 
@@ -69,7 +69,7 @@ class ArrayDenormalizer implements ContextAwareDenormalizerInterface, Denormaliz
             throw new BadMethodCallException(sprintf('The nested denormalizer needs to be set to allow "%s()" to be used.', __METHOD__));
         }
 
-        return str_ends_with($type, '[]')
+        return '[]' === substr($type, -2)
             && $this->denormalizer->supportsDenormalization($data, substr($type, 0, -2), $format, $context);
     }
 

@@ -28,10 +28,12 @@ final class AlignEqualsFixerHelper extends AbstractAlignFixerHelper
 {
     public function __construct()
     {
-        Utils::triggerDeprecation(new \RuntimeException(sprintf(
-            'The "%s" class is deprecated. You should stop using it, as it will be removed in 3.0 version.',
-            __CLASS__
-        )));
+        Utils::triggerDeprecation(
+            sprintf(
+                'The "%s" class is deprecated. You should stop using it, as it will be removed in 3.0 version.',
+                __CLASS__
+            )
+        );
     }
 
     /**

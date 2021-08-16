@@ -101,11 +101,11 @@ $c = 3;
     /**
      * {@inheritdoc}
      *
-     * Must run after HeaderCommentFixer, NoUselessReturnFixer.
+     * Must run after NoUselessReturnFixer.
      */
     public function getPriority()
     {
-        return -31;
+        return -19;
     }
 
     /**

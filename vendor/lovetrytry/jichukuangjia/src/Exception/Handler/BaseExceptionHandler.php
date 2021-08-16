@@ -38,17 +38,18 @@ class BaseExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
-        $this->logger->error($throwable->getTraceAsString());
-        if (! ($throwable instanceof BusinessException)) {
+        if ($throwable instanceof BusinessException) {
+            $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
+            $this->logger->error($throwable->getTraceAsString());
+        } else {
             $this->errorLogger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
             $this->errorLogger->error($throwable->getTraceAsString());
         }
         return $response->withHeader('Content-Type', 'application/json')
-            ->withStatus($throwable->getCode())
-            ->withBody(
-                new SwooleStream($throwable->getMessage())
-            );
+                        ->withStatus($throwable->getCode())
+                        ->withBody(
+                            new SwooleStream($throwable->getMessage())
+                        );
     }
 
     public function isValid(Throwable $throwable): bool

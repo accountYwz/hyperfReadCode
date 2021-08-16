@@ -120,14 +120,35 @@ class Table implements \Iterator, \ArrayAccess, \Countable
     /**
      * @return mixed
      */
-    public function rewind()
+    public function offsetExists($offset)
     {
     }
 
     /**
      * @return mixed
      */
-    public function valid()
+    public function offsetGet($offset)
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function offsetSet($offset, $value)
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function offsetUnset($offset)
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function rewind()
     {
     }
 
@@ -149,6 +170,13 @@ class Table implements \Iterator, \ArrayAccess, \Countable
      * @return mixed
      */
     public function key()
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function valid()
     {
     }
 

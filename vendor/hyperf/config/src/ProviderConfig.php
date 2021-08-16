@@ -34,6 +34,8 @@ class ProviderConfig
     public static function load(): array
     {
         if (! static::$providerConfigs) {
+            //composer.lock 文件的extra.hyperf.config 有啥作用？
+            //解析composer.lock 文件,获得每个包下面extra.hyperf.config
             $providers = Composer::getMergedExtra('hyperf')['config'] ?? [];
             static::$providerConfigs = static::loadProviders($providers);
         }
@@ -45,6 +47,7 @@ class ProviderConfig
         static::$providerConfigs = [];
     }
 
+    //遍历通过__invoke方法获取/vend/hyperf下面所有组件的 ConfigProvider.php 的dependencies值
     protected static function loadProviders(array $providers): array
     {
         $providerConfigs = [];

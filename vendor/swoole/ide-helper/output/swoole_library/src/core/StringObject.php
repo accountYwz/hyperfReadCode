@@ -124,28 +124,29 @@ class StringObject
         return new static(substr($this->string, ...func_get_args()));
     }
 
-    /**
-     * @return static
-     */
-    public function repeat(int $times): self
+    public function repeat(int $n): StringObject
     {
-        return new static(str_repeat($this->string, $times));
+        return new static(str_repeat($this->string, $n));
     }
 
     /**
-     * @param mixed $str
-     * @return static
+     * @param $str
      */
-    public function append($str): self
+    public function append($str): StringObject
     {
-        return new static($this->string .= $str);
+        if (is_string($str)) {
+            $this->string .= $str;
+        } else {
+            $this->string .= strval($str);
+        }
+        return $this;
     }
 
     /**
      * @param null|int $count
      * @return static
      */
-    public function replace(string $search, string $replace, &$count = null): self
+    public function replace(string $search, string $replace, &$count = null)
     {
         return new static(str_replace($search, $replace, $this->string, $count));
     }
@@ -192,7 +193,7 @@ class StringObject
     /**
      * @return static
      */
-    public function chunkSplit(int $chunkLength = 76, string $chunkEnd = ''): self
+    public function chunkSplit(int $chunkLength = 76, string $chunkEnd = '')
     {
         return new static(chunk_split($this->string, ...func_get_args()));
     }

@@ -50,20 +50,6 @@ class Coroutine
     /**
      * @return mixed
      */
-    public static function cancel($cid)
-    {
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function isCanceled()
-    {
-    }
-
-    /**
-     * @return mixed
-     */
     public static function suspend()
     {
     }
@@ -169,7 +155,7 @@ class Coroutine
     /**
      * @return mixed
      */
-    public static function dnsLookup($domain_name, $timeout = null, $type = null)
+    public static function dnsLookup($domain_name, $timeout = null)
     {
     }
 

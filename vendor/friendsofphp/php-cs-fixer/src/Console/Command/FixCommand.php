@@ -41,9 +41,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
  */
 final class FixCommand extends Command
 {
-    /**
-     * @var string
-     */
     protected static $defaultName = 'fix';
 
     /**

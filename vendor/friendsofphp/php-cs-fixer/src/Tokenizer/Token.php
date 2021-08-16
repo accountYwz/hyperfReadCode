@@ -77,6 +77,10 @@ class Token
             $this->isArray = true;
             $this->id = $token[0];
             $this->content = $token[1];
+
+            if ($token[0] && '' === $token[1]) {
+                throw new \InvalidArgumentException('Cannot set empty content for id-based Token.');
+            }
         } elseif (\is_string($token)) {
             $this->isArray = false;
             $this->content = $token;
@@ -139,7 +143,7 @@ class Token
      */
     public function clear()
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
         Tokens::setLegacyMode(true);
 
         $this->content = '';
@@ -154,7 +158,7 @@ class Token
      */
     public function clearChanged()
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
         Tokens::setLegacyMode(true);
 
         $this->changed = false;
@@ -413,7 +417,7 @@ class Token
      */
     public function isChanged()
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
 
         return $this->changed;
     }
@@ -459,7 +463,7 @@ class Token
      */
     public function isEmpty()
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
 
         return null === $this->id && ('' === $this->content || null === $this->content);
     }
@@ -545,7 +549,7 @@ class Token
      */
     public function override($other)
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
         Tokens::setLegacyMode(true);
 
         $prototype = $other instanceof self ? $other->getPrototype() : $other;
@@ -576,7 +580,7 @@ class Token
      */
     public function setContent($content)
     {
-        Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' is deprecated and will be removed in 3.0.'));
+        Utils::triggerDeprecation(__METHOD__.' is deprecated and will be removed in 3.0.');
         Tokens::setLegacyMode(true);
 
         if ($this->content === $content) {
@@ -588,7 +592,7 @@ class Token
 
         // setting empty content is clearing the token
         if ('' === $content) {
-            Utils::triggerDeprecation(new \RuntimeException(__METHOD__.' shall not be used to clear token, use Tokens::clearAt instead.'));
+            Utils::triggerDeprecation(__METHOD__.' shall not be used to clear token, use Tokens::clearAt instead.');
             $this->id = null;
             $this->isArray = false;
         }
@@ -613,10 +617,7 @@ class Token
     public function toJson(array $options = null)
     {
         if (null !== $options) {
-            Utils::triggerDeprecation(new \RuntimeException(sprintf(
-                'Arguments of "%s()" is deprecated since 2.19 and will be removed in 3.0.',
-                __METHOD__
-            )));
+            Utils::triggerDeprecation(sprintf('Arguments of "%s()" is deprecated since 2.19 and will be removed in 3.0.', __METHOD__));
         }
 
         $options = $options ? Utils::calculateBitmask($options) : (JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);

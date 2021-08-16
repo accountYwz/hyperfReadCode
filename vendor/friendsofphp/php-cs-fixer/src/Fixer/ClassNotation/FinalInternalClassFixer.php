@@ -205,9 +205,7 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurati
         $tags = [];
 
         foreach ($doc->getAnnotations() as $annotation) {
-            if (1 !== Preg::match('/@\S+(?=\s|$)/', $annotation->getContent(), $matches)) {
-                continue;
-            }
+            Preg::match('/@\S+(?=\s|$)/', $annotation->getContent(), $matches);
             $tag = strtolower(substr(array_shift($matches), 1));
             foreach ($this->configuration['annotation_exclude'] as $tagStart => $true) {
                 if (0 === strpos($tag, $tagStart)) {

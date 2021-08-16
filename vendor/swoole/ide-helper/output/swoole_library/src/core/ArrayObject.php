@@ -103,19 +103,6 @@ class ArrayObject implements ArrayAccess, Serializable, Countable, Iterator
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $default
-     * @return ArrayObject|StringObject
-     */
-    public function getOr($key, $default = null)
-    {
-        if (!$this->exists($key)) {
-            return $default;
-        }
-        return static::detectType($this->array[$key]);
-    }
-
-    /**
      * @return mixed
      */
     public function last()

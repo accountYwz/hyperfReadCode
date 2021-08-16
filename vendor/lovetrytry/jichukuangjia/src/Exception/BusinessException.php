@@ -9,7 +9,6 @@ use Lovetrytry\Jichukuangjia\Constants\ErrorCodeMessage;
 use Lovetrytry\Jichukuangjia\Format;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
-use App\Constants\CodeMsg;
 
 /**
  * Exception for signaling runtime errors.
@@ -30,7 +29,7 @@ class BusinessException extends ServerException
     public function __construct(int $code = 0, string $message = null, Throwable $previous = null)
     {
         if (is_null($message)) {
-            $message = CodeMsg::getMessage($code);
+            $message = \App\ErrorCode\CodeMsg::getMessage($code);
         }
 
         $format = new Format;

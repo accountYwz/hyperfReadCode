@@ -79,12 +79,12 @@ class Foo {
     /**
      * {@inheritdoc}
      *
-     * Must run before NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer.
+     * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
     public function getPriority()
     {
-        return 7;
+        return parent::getPriority();
     }
 
     protected function isSkippedType($type)

@@ -80,8 +80,6 @@ final class FileCacheManager implements CacheManagerInterface
     /**
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
-     *
-     * @return array
      */
     public function __sleep()
     {

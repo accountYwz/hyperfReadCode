@@ -29,5 +29,4 @@ return array(
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     '42beea35c2b5d940652346ba950a6af1' => $vendorDir . '/hyperf/filesystem/src/Adapter/AliyunOssHook.php',
     '41174750109acfe6233bafee4ba77003' => $vendorDir . '/hyperf/view-engine/src/Functions.php',
-    '8f3aca2fe69e30eb786a7eddf7e6707b' => $baseDir . '/app/Common/Functions.php',
 );

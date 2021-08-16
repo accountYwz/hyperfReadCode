@@ -64,9 +64,9 @@ echo "Hello!";
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokensOrg)
     {
-        $content = $tokens->generateCode();
+        $content = $tokensOrg->generateCode();
 
         // replace all <? with <?php to replace all short open tags even without short_open_tag option enabled
         $newContent = Preg::replace('/<\?(?:phP|pHp|pHP|Php|PhP|PHp|PHP)?(\s|$)/', '<?php$1', $content, -1, $count);
@@ -80,11 +80,11 @@ echo "Hello!";
          * with
          * > echo '<?php ';
          */
-        $newTokens = Tokens::fromCode($newContent);
+        $tokens = Tokens::fromCode($newContent);
 
         $tokensOldContentLength = 0;
 
-        foreach ($newTokens as $index => $token) {
+        foreach ($tokens as $index => $token) {
             if ($token->isGivenKind(T_OPEN_TAG)) {
                 $tokenContent = $token->getContent();
 
@@ -119,13 +119,13 @@ echo "Hello!";
                     }
                 }
 
-                $newTokens[$index] = new Token([$token->getId(), $tokenContent]);
-                $token = $newTokens[$index];
+                $tokens[$index] = new Token([$token->getId(), $tokenContent]);
+                $token = $tokens[$index];
             }
 
             $tokensOldContentLength += \strlen($token->getContent());
         }
 
-        $tokens->overrideRange(0, $tokens->count() - 1, $newTokens);
+        $tokensOrg->overrideRange(0, $tokensOrg->count() - 1, $tokens);
     }
 }

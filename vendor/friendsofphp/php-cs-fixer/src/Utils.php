@@ -24,9 +24,6 @@ use PhpCsFixer\Tokenizer\Token;
  */
 final class Utils
 {
-    /**
-     * @var array<string,true>
-     */
     private static $deprecations = [];
 
     /**
@@ -190,28 +187,22 @@ final class Utils
 
     /**
      * Handle triggering deprecation error.
+     *
+     * @param string $message
+     * @param string $exceptionClass
      */
-    public static function triggerDeprecation(\Exception $futureException)
+    public static function triggerDeprecation($message, $exceptionClass = \RuntimeException::class)
     {
         if (getenv('PHP_CS_FIXER_FUTURE_MODE')) {
-            throw new \RuntimeException(
-                'Your are using something deprecated, see previous exception. Aborting execution because `PHP_CS_FIXER_FUTURE_MODE` environment variable is set.',
-                0,
-                $futureException
-            );
+            throw new $exceptionClass("{$message} This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.");
         }
 
-        $message = $futureException->getMessage();
-
-        self::$deprecations[$message] = true;
+        self::$deprecations[] = $message;
         @trigger_error($message, E_USER_DEPRECATED);
     }
 
     public static function getTriggeredDeprecations()
     {
-        $triggeredDeprecations = array_keys(self::$deprecations);
-        sort($triggeredDeprecations);
-
-        return $triggeredDeprecations;
+        return self::$deprecations;
     }
 }

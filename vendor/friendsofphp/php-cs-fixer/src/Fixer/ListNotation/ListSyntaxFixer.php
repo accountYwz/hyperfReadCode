@@ -29,9 +29,6 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ListSyntaxFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
-    /**
-     * @var null|int
-     */
     private $candidateTokenKind;
 
     /**
