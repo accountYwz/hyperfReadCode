@@ -44,7 +44,7 @@ class WorkerStartCallback
      */
     public function onWorkerStart(SwooleServer $server, int $workerId)
     {
-        echo "-------------".PHP_EOL;
+        echo "------WorkerStartCallback-------".PHP_EOL;
         var_dump($workerId);
 
         $this->eventDispatcher->dispatch(new BeforeWorkerStart($server, $workerId));

@@ -52,6 +52,7 @@ class InitProcessTitleListener implements ListenerInterface
 
     public function process(object $event)
     {
+
         $array = [];
         if ($this->name !== '') {
             $array[] = $this->name;
@@ -73,7 +74,8 @@ class InitProcessTitleListener implements ListenerInterface
             $array[] = $event->process->name;
             $array[] = $event->index;
         }
-
+        var_dump('-----------InitProcessTitleListener-----------');
+        var_dump($array);
         if ($title = implode($this->dot, $array)) {
             $this->setTitle($title);
         }
@@ -82,6 +84,7 @@ class InitProcessTitleListener implements ListenerInterface
     protected function setTitle(string $title)
     {
         if ($this->isSupportedOS()) {
+            //设置进程名称
             @cli_set_process_title($title);
         }
     }

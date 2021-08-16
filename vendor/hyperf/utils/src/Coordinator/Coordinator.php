@@ -40,6 +40,7 @@ class Coordinator
 
     /**
      * Wakeup all coroutines yielding for this coordinator.
+     * 唤醒为此协调器产生的所有协程
      */
     public function resume(): void
     {

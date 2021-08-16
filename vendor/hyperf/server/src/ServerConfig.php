@@ -38,7 +38,6 @@ class ServerConfig implements Arrayable
     public function __construct(array $config = [])
     {
         $this->config = $config;
-
         if (empty($config['servers'] ?? [])) {
             throw new InvalidArgumentException('Config server.servers not exist.');
         }

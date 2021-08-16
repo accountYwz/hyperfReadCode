@@ -20,7 +20,7 @@ return [
             'name' => 'http',
             'type' => Server::SERVER_HTTP,
             'host' => '0.0.0.0',
-            'port' => (int)env('HTTP_PORT', 9511),
+            'port' => (int)env('HTTP_PORT', 9531),
             'sock_type' => SWOOLE_SOCK_TCP,
             'callbacks' => [
                 Event::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
@@ -40,6 +40,7 @@ return [
         Constant::OPTION_BUFFER_OUTPUT_SIZE => 2 * 1024 * 1024,
         Constant::OPTION_TASK_WORKER_NUM => 2,
         Constant::OPTION_TASK_ENABLE_COROUTINE => false,
+        'stats_file' => __DIR__ . '/stats.log',
     ],
     'callbacks' => [
         Event::ON_WORKER_START => [Hyperf\Framework\Bootstrap\WorkerStartCallback::class, 'onWorkerStart'],

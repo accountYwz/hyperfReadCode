@@ -47,6 +47,7 @@ class TaskExecutor
     public function setServer(Server $server): void
     {
         $this->server = $server;
+        //var_dump($server->setting);
         if (! isset($server->setting['task_worker_num']) || $server->setting['task_worker_num'] <= 0) {
             throw new TaskException('Missing Task Worker processes, please set server.settings.task_worker_num before use task.');
         }

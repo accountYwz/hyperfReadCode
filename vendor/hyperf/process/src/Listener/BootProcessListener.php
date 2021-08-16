@@ -53,6 +53,8 @@ class BootProcessListener implements ListenerInterface
     /**
      * Handle the Event when the event is triggered, all listeners will
      * complete before the event is returned to the EventDispatcher.
+     * 事件触发时处理事件，所有监听器都会
+    *  在事件返回给 EventDispatcher 之前完成。
      */
     public function process(object $event)
     {
@@ -65,7 +67,10 @@ class BootProcessListener implements ListenerInterface
         $annotationProcesses = $this->getAnnotationProcesses();
 
         // Retrieve the processes have been registered.
+        //检索已注册的进程
         $processes = array_merge($serverProcesses, $processes, ProcessManager::all(), array_keys($annotationProcesses));
+//        var_dump('------------$processes---------------');
+//        var_dump($processes);
         foreach ($processes as $process) {
             if (is_string($process)) {
                 $instance = $this->container->get($process);

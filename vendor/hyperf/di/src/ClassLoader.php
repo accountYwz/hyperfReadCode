@@ -39,14 +39,12 @@ class ClassLoader
 
     public function __construct(ComposerClassLoader $classLoader, string $proxyFileDir, string $configDir)
     {
-        echo '5---'.PHP_EOL;
         //将ComposerClassLoader $classLoader加载器复制给hyperf的加载器
         $this->setComposerClassLoader($classLoader);
         //解析.env环境
         if (file_exists(BASE_PATH . '/.env')) {
             $this->loadDotenv();
         }
-        echo '6---'.PHP_EOL;
         //生成代理类缓存，代理类缓存有啥作用？
         // Scan by ScanConfig to generate the reflection class map
         $config = ScanConfig::instance($configDir);
@@ -57,7 +55,6 @@ class ClassLoader
         $composerLoaderClassMap = $this->getComposerClassLoader()->getClassMap();
         $proxyManager = new ProxyManager($reflectionClassMap, $composerLoaderClassMap, $proxyFileDir);
         $this->proxies = $proxyManager->getProxies();
-        echo '7---'.PHP_EOL;
     }
 
     public function loadClass(string $class): void

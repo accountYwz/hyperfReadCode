@@ -30,7 +30,7 @@ class CoordinatorManager
 
     /**
      * Get a Coordinator from container by the identifier.
-     *
+     *通过标识符从容器中获取 Coordinator。
      * @throws \RuntimeException when the Coordinator with the identifier has not initialization
      */
     public static function until(string $identifier): Coordinator

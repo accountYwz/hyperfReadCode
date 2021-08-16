@@ -90,6 +90,7 @@ class Server implements ServerInterface
 
     protected function initServers(ServerConfig $config)
     {
+
         $servers = $this->sortServers($config->getServers());
         foreach ($servers as $server) {
             $name = $server->getName();
@@ -98,12 +99,11 @@ class Server implements ServerInterface
             $port = $server->getPort();
             $sockType = $server->getSockType();
             $callbacks = $server->getCallbacks();
-//            var_dump('---$callbacks--------------');
-//            var_dump($callbacks);
             if (! $this->server instanceof SwooleServer) {
                 var_dump('------9999-100000000----');
                 $this->server = $this->makeServer($type, $host, $port, $config->getMode(), $sockType);
                 $callbacks = array_replace($this->defaultCallbacks(), $config->getCallbacks(), $callbacks);
+                //注册swoole事件
                 $this->registerSwooleEvents($this->server, $callbacks, $name);
                 $this->server->set(array_replace($config->getSettings(), $server->getSettings()));
                 ServerManager::add($name, [$type, current($this->server->ports)]);
@@ -196,6 +196,7 @@ class Server implements ServerInterface
             }
             if (is_array($callback)) {
                 [$className, $method] = $callback;
+                //var_dump($this->onRequestCallbacks);
                 if (array_key_exists($className . $method, $this->onRequestCallbacks)) {
                     $this->logger->warning(sprintf('%s will be replaced by %s. Each server should have its own onRequest callback. Please check your configs.', $this->onRequestCallbacks[$className . $method], $serverName));
                 }
