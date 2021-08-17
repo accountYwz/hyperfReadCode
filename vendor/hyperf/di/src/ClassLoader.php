@@ -104,7 +104,7 @@ class ClassLoader
         foreach ($loaders as $loader) {
             spl_autoload_register($loader);
         }
-        //初始化延迟加载器。 这会将 LazyLoader 添加到自动加载队列的顶部
+        //初始化懒加载器。 这会将 LazyLoader 添加到自动加载队列的顶部
         // Initialize Lazy Loader. This will prepend LazyLoader to the top of autoload queue.
         LazyLoader::bootstrap($configDir);
     }

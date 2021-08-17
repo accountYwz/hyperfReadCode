@@ -4758,9 +4758,13 @@ class ComposerStaticInita640a45dad785fd23bd8fd6894469153
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            //psr4匹配顶级命名空间长度
             $loader->prefixLengthsPsr4 = ComposerStaticInita640a45dad785fd23bd8fd6894469153::$prefixLengthsPsr4;
+            //psr4匹配目录
             $loader->prefixDirsPsr4 = ComposerStaticInita640a45dad785fd23bd8fd6894469153::$prefixDirsPsr4;
+            //psr0匹配
             $loader->prefixesPsr0 = ComposerStaticInita640a45dad785fd23bd8fd6894469153::$prefixesPsr0;
+            //classmap：常用来管理不归属于命名空间的类，比如 databases 目录下的类，在配置的时候只需要配置目录路径即可。
             $loader->classMap = ComposerStaticInita640a45dad785fd23bd8fd6894469153::$classMap;
 
         }, null, ClassLoader::class);
