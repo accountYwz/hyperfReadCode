@@ -27,6 +27,7 @@ class ComposerAutoloaderInita640a45dad785fd23bd8fd6894469153
         //spl_autoload_register将函数注册到SPL __autoload函数栈中。如果该栈中的函数尚未激活，则激活它们。
         //注册一个自动加载器loadClassLoader,如果在调用的代码中引入类不存在，则调用该加载器查找。
         spl_autoload_register(array('ComposerAutoloaderInita640a45dad785fd23bd8fd6894469153', 'loadClassLoader'), true, true);
+
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(\dirname(__FILE__)));
 
 

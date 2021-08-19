@@ -14,18 +14,18 @@ require BASE_PATH . '/vendor/autoload.php';
 
 // Self-called anonymous function that creates its own scope and keep the global namespace clean.
 (function () {
-    //hyperf容器类加载器初始化
+    //hyperf容器类加载器初始化，生成代理
     Hyperf\Di\ClassLoader::init();
     //初始化容器
     /** @var Psr\Container\ContainerInterface $container */
-    $container = require BASE_PATH . '/config/container.php';
+    //$container = require BASE_PATH . '/config/container.php';
 
 //    $res = $container->get(\Hyperf\Cache\Cache::class);
 //    var_dump($res);
 //    $container->get()会遍历初并始化Hyperf\Contract\ApplicationInterface::class Entry所有的类。resolver
-    //从容器中获取应用的所有依赖
-    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
-    //Symfony\Component\Console\Command\Application->run()
-    //运行当前应用
-    $application->run();
+    //从容器中获取应用的所有依赖，比如http应用
+//    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
+//    //Symfony\Component\Console\Command\Application->run()
+//    //运行当前应用
+//    $application->run();
 })();

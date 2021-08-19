@@ -52,9 +52,12 @@ class Scanner
         foreach ($scanConfig->getIgnoreAnnotations() as $annotation) {
             AnnotationReader::addGlobalIgnoredName($annotation);
         }
+
         foreach ($scanConfig->getGlobalImports() as $alias => $annotation) {
+
             AnnotationReader::addGlobalImports($alias, $annotation);
         }
+
     }
 
     public function collect(AnnotationReader $reader, ReflectionClass $reflection)
@@ -108,14 +111,19 @@ class Scanner
      */
     public function scan(): array
     {
+        //$scanConfig->getGlobalImports() 获取所有/vendor/hyper/XXXX/src 具体Annotation的路径
         $paths = $this->scanConfig->getPaths();
+//        var_dump($paths);
         $collectors = $this->scanConfig->getCollectors();
+//        var_dump('----------$collectors---------------');
+//        var_dump($collectors);
         $classes = [];
         if (! $paths) {
             return $classes;
         }
 
         $annotationReader = new AnnotationReader();
+        //反序列化缓存$collectors
         $lastCacheModified = $this->deserializeCachedCollectors($collectors);
         if ($lastCacheModified > 0 && $this->scanConfig->isCacheable()) {
             return [];

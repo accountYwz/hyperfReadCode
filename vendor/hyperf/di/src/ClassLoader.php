@@ -45,11 +45,14 @@ class ClassLoader
         if (file_exists(BASE_PATH . '/.env')) {
             $this->loadDotenv();
         }
-        //生成代理类缓存，代理类缓存有啥作用？
+        //生成代理类缓存，代理类缓存有啥作用？生成代理缓存，以便aop切面
         // Scan by ScanConfig to generate the reflection class map
+        //实例化配置扫码配置
         $config = ScanConfig::instance($configDir);
         $classLoader->addClassMap($config->getClassMap());
+        //创建扫描器
         $scanner = new Scanner($this, $config);
+        //扫描形成映射类
         $reflectionClassMap = $scanner->scan();
         // Get the class map of Composer loader
         $composerLoaderClassMap = $this->getComposerClassLoader()->getClassMap();
@@ -80,7 +83,6 @@ class ClassLoader
         //返回所有已注册的 __autoload() 函数.composer工作时已经注册
         $loaders = spl_autoload_functions();
 
-
         // Proxy the composer class loader
         foreach ($loaders as &$loader) {
             $unregisterLoader = $loader;
@@ -92,6 +94,7 @@ class ClassLoader
                 AnnotationRegistry::registerLoader(function ($class) use ($composerClassLoader) {
                     return (bool) $composerClassLoader->findFile($class);
                 });
+                //初始化DI加载器
                 $loader[0] = new static($composerClassLoader, $proxyFileDirPath, $configDir);
             }
             spl_autoload_unregister($unregisterLoader);

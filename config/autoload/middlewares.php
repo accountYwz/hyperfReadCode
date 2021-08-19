@@ -13,12 +13,12 @@ return [
     'http' => [
 //        \App\Middleware\Request::class,
         //验签
-        \App\Middleware\Sign::class,
+//        \App\Middleware\Sign::class,
 
-        \App\Middleware\Request::class,
-        \App\Middleware\Response::class,
+//        \App\Middleware\Request::class,
+//        \App\Middleware\Response::class,
 
         // last
-        \Lovetrytry\Jichukuangjia\Middleware\Response::class,
+//        \Lovetrytry\Jichukuangjia\Middleware\Response::class,
     ],
 ];

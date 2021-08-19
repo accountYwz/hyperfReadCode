@@ -129,7 +129,7 @@ class ScanConfig
         }
 
         $configDir = rtrim($configDir, '/');
-
+        //initConfigByFile 初始化配置文件
         [$config, $serverDependencies, $cacheable] = static::initConfigByFile($configDir);
 
         return self::$instance = new self(
@@ -160,7 +160,8 @@ class ScanConfig
         }
 
         $config = static::allocateConfigValue($configFromProviders['annotations'] ?? [], $config);
-
+//        var_dump('---------------$config-----------');
+//        var_dump($config);
         // Load the config/autoload/annotations.php and merge the config
         if (file_exists($configDir . '/autoload/annotations.php')) {
             $annotations = include $configDir . '/autoload/annotations.php';
