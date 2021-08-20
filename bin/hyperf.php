@@ -18,7 +18,7 @@ require BASE_PATH . '/vendor/autoload.php';
     Hyperf\Di\ClassLoader::init();
     //初始化容器
     /** @var Psr\Container\ContainerInterface $container */
-    //$container = require BASE_PATH . '/config/container.php';
+    $container = require BASE_PATH . '/config/container.php';
 
 //    $res = $container->get(\Hyperf\Cache\Cache::class);
 //    var_dump($res);
