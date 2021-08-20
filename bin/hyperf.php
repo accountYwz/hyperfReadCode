@@ -24,8 +24,8 @@ require BASE_PATH . '/vendor/autoload.php';
 //    var_dump($res);
 //    $container->get()会遍历初并始化Hyperf\Contract\ApplicationInterface::class Entry所有的类。resolver
     //从容器中获取应用的所有依赖，比如http应用
-//    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
-//    //Symfony\Component\Console\Command\Application->run()
+    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
+    //Symfony\Component\Console\Command\Application->run()
 //    //运行当前应用
-//    $application->run();
+    $application->run();
 })();
