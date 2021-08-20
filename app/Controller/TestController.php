@@ -14,19 +14,18 @@ use App\Controller\Bar;
 use Hyperf\Di\Annotation\AnnotationCollector;
 
 /**
- * Class IndexController
+ * Class TestControllers
  * @package App\Controller
- * @Bar(name="test",age="100");
+ * @Bar(name="test1111",age="testtest100");
  */
-class IndexController extends AbstractController
+class TestController extends AbstractController
 {
     public function index()
     {
         var_dump(1000);
         $classByAnnotation = AnnotationCollector::getClassesByAnnotation(Bar::class);
-        var_dump($classByAnnotation);
-        $name = $classByAnnotation[IndexController::class]->name;
-        $age =  $classByAnnotation[IndexController::class]->age;
+        $name = $classByAnnotation[self::class]->name;
+        $age =  $classByAnnotation[self::class]->age;
         var_dump($name,$age);
     }
 }

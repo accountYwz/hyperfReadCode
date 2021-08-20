@@ -1,0 +1,23 @@
+[2021-08-20 09:29:27] log.ERROR: Too few arguments to function Hyperf\Di\Annotation\AnnotationCollector::getClassAnnotation(), 1 passed in /hyperfReadCode/hyperfReadCode/app/Controller/IndexController.php on line 26 and exactly 2 expected[101] in /hyperfReadCode/hyperfReadCode/vendor/hyperf/di/src/Annotation/AnnotationCollector.php [] []
+[2021-08-20 09:29:27] log.ERROR: #0 /hyperfReadCode/hyperfReadCode/app/Controller/IndexController.php(26): Hyperf\Di\Annotation\AnnotationCollector::getClassAnnotation()
+#1 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php(161): App\Controller\IndexController->index()
+#2 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php(113): Hyperf\HttpServer\CoreMiddleware->handleFound()
+#3 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): Hyperf\HttpServer\CoreMiddleware->process()
+#4 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#5 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#6 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/Server.php(117): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#7 {main} [] []
+[2021-08-20 09:34:23] log.ERROR: Not Found[173] in /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php [] []
+[2021-08-20 09:34:23] log.ERROR: #0 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php(107): Hyperf\HttpServer\CoreMiddleware->handleNotFound()
+#1 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): Hyperf\HttpServer\CoreMiddleware->process()
+#2 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#3 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#4 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/Server.php(117): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#5 {main} [] []
+[2021-08-20 09:34:58] log.ERROR: Not Found[173] in /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php [] []
+[2021-08-20 09:34:58] log.ERROR: #0 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/CoreMiddleware.php(107): Hyperf\HttpServer\CoreMiddleware->handleNotFound()
+#1 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/AbstractRequestHandler.php(64): Hyperf\HttpServer\CoreMiddleware->process()
+#2 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpRequestHandler.php(26): Hyperf\Dispatcher\AbstractRequestHandler->handleRequest()
+#3 /hyperfReadCode/hyperfReadCode/vendor/hyperf/dispatcher/src/HttpDispatcher.php(40): Hyperf\Dispatcher\HttpRequestHandler->handle()
+#4 /hyperfReadCode/hyperfReadCode/vendor/hyperf/http-server/src/Server.php(117): Hyperf\Dispatcher\HttpDispatcher->dispatch()
+#5 {main} [] []
