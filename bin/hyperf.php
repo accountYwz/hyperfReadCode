@@ -20,12 +20,12 @@ require BASE_PATH . '/vendor/autoload.php';
     /** @var Psr\Container\ContainerInterface $container */
     $container = require BASE_PATH . '/config/container.php';
 
-//    $res = $container->get(\Hyperf\Cache\Cache::class);
-//    var_dump($res);
+    $res = $container->get(\Hyperf\Cache\Cache::class);
+    var_dump($res);
 //    $container->get()会遍历初并始化Hyperf\Contract\ApplicationInterface::class Entry所有的类。resolver
-    //从容器中获取应用的所有依赖，比如http应用
-    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
+    //从容器中获取应用的所有依赖，比如http应用.这部分代码中如何解决依赖中的依赖？
+//    $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
     //Symfony\Component\Console\Command\Application->run()
 //    //运行当前应用
-    $application->run();
+//    $application->run();
 })();

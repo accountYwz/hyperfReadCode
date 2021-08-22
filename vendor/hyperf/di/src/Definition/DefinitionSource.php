@@ -102,14 +102,12 @@ class DefinitionSource implements DefinitionSourceInterface
         $definitions = [];
 
         foreach ($source as $identifier => $definition) {
-
-                $normalizedDefinition = $this->normalizeDefinition($identifier, $definition);
+           $normalizedDefinition = $this->normalizeDefinition($identifier, $definition);
 //                var_dump('--------$normalizeSource-----------');
 //                var_dump($normalizedDefinition);
-                if (! is_null($normalizedDefinition)) {
-                    $definitions[$identifier] = $normalizedDefinition;
-                }
-
+           if (! is_null($normalizedDefinition)) {
+               $definitions[$identifier] = $normalizedDefinition;
+           }
 
         }
         return $definitions;

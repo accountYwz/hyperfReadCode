@@ -80,7 +80,6 @@ class Container implements HyperfContainerInterface
 //        var_dump('-------$name------');
 //        var_dump($name);
         $definition = $this->getDefinition($name);
-
         if (! $definition) {
             throw new NotFoundException("No entry or class found for '{$name}'");
         }
