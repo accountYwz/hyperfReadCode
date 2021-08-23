@@ -28,7 +28,7 @@ class Coordinator
     /**
      * Yield the current coroutine for a given timeout,
      * unless the coordinator is woke up from outside.
-     *
+     *在给定的超时时间内产生当前协程，除非协调员是从外面醒来的。
      * @param float|int $timeout
      * @return bool returns true if the coordinator has been woken up
      */

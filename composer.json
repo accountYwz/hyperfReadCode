@@ -31,6 +31,7 @@
     "hyperf/logger": "~2.1.0",
     "hyperf/memory": "~2.1.0",
     "hyperf/process": "~2.1.0",
+    "hyperf/reactive-x": "2.1.x-dev",
     "hyperf/redis": "~2.1.0",
     "hyperf/rpc-client": "^2.1",
     "hyperf/task": "^2.1",

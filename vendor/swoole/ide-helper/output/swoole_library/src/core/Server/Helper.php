@@ -170,7 +170,6 @@ class Helper
 
     public static function onWorkerStart(Server $server, int $workerId)
     {
-        var_dump('--------Helper---------onWorkerStart-----');
         if (!empty($server->setting['stats_file']) and $workerId == 0) {
             $server->stats_timer = Timer::tick(self::STATS_TIMER_INTERVAL_TIME, function () use ($server) {
                 $stats = $server->stats();

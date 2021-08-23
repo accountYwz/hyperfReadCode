@@ -132,7 +132,6 @@ class Application implements ResetInterface
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
-        var_dump('-------2--------');
         if (\function_exists('putenv')) {
             @putenv('LINES='.$this->terminal->getHeight());
             @putenv('COLUMNS='.$this->terminal->getWidth());
@@ -636,6 +635,7 @@ class Application implements ResetInterface
         $this->init();
 
         $aliases = [];
+
         foreach ($this->commands as $command) {
             foreach ($command->getAliases() as $alias) {
                 if (!$this->has($alias)) {
@@ -819,7 +819,7 @@ class Application implements ResetInterface
                 $len = 0;
             }
 
-            if (false !== strpos($message, "@anonymous\0")) {
+            if (str_contains($message, "@anonymous\0")) {
                 $message = preg_replace_callback('/[a-zA-Z_\x7f-\xff][\\\\a-zA-Z0-9_\x7f-\xff]*+@anonymous\x00.*?\.php(?:0x?|:[0-9]++\$)[0-9a-fA-F]++/', function ($m) {
                     return class_exists($m[0], false) ? (get_parent_class($m[0]) ?: key(class_implements($m[0])) ?: 'class').'@anonymous' : $m[0];
                 }, $message);
@@ -941,15 +941,13 @@ class Application implements ResetInterface
      */
     protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
     {
-//        var_dump('-------$command---------');
-//        var_dump($command);
         foreach ($command->getHelperSet() as $helper) {
             if ($helper instanceof InputAwareInterface) {
                 $helper->setInput($input);
             }
         }
 
-        if ($command instanceof SignalableCommandInterface) {
+        if ($command instanceof SignalableCommandInterface && ($this->signalsToDispatchEvent || $command->getSubscribedSignals())) {
             if (!$this->signalRegistry) {
                 throw new RuntimeException('Unable to subscribe to signal events. Make sure that the `pcntl` extension is installed and that "pcntl_*" functions are not disabled by your php.ini\'s "disable_functions" directive.');
             }
@@ -995,8 +993,6 @@ class Application implements ResetInterface
             $this->dispatcher->dispatch($event, ConsoleEvents::COMMAND);
 
             if ($event->commandShouldRun()) {
-//                var_dump('-----$command--------');
-//                var_dump($command);
                 $exitCode = $command->run($input, $output);
             } else {
                 $exitCode = ConsoleCommandEvent::RETURN_CODE_DISABLED;
@@ -1123,7 +1119,7 @@ class Application implements ResetInterface
                 }
 
                 $lev = levenshtein($subname, $parts[$i]);
-                if ($lev <= \strlen($subname) / 3 || '' !== $subname && false !== strpos($parts[$i], $subname)) {
+                if ($lev <= \strlen($subname) / 3 || '' !== $subname && str_contains($parts[$i], $subname)) {
                     $alternatives[$collectionName] = $exists ? $alternatives[$collectionName] + $lev : $lev;
                 } elseif ($exists) {
                     $alternatives[$collectionName] += $threshold;
@@ -1133,7 +1129,7 @@ class Application implements ResetInterface
 
         foreach ($collection as $item) {
             $lev = levenshtein($name, $item);
-            if ($lev <= \strlen($name) / 3 || false !== strpos($item, $name)) {
+            if ($lev <= \strlen($name) / 3 || str_contains($item, $name)) {
                 $alternatives[$item] = isset($alternatives[$item]) ? $alternatives[$item] - $lev : $lev;
             }
         }
@@ -1151,7 +1147,7 @@ class Application implements ResetInterface
      */
     public function setDefaultCommand(string $commandName, bool $isSingleCommand = false)
     {
-        $this->defaultCommand = $commandName;
+        $this->defaultCommand = explode('|', ltrim($commandName, '|'))[0];
 
         if ($isSingleCommand) {
             // Ensure the command exist
